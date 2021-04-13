@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  tmnf-server:
+    image: mpoc/tmnf-server
+    container_name: tmnf-server
+    volumes:
+      - ./config/tracks:/tmnf-server/GameData/Tracks/Challenges/Custom
+      - ./config/dedicated_cfg.txt:/tmnf-server/GameData/Config/dedicated_cfg.txt
+      - ./config/custom_match_settings.txt:/tmnf-server/GameData/Tracks/MatchSettings/custom_match_settings.txt
+    ports:
+      - "2350:2350/tcp"
+      - "2350:2350/udp"
+      - "3450:3450/tcp"
+      - "3450:3450/udp"
