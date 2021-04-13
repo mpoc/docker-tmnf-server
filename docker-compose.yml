@@ -15,10 +15,10 @@ services:
   xaseco:
     image: mpoc/xaseco
     volumes:
-      - ./xaseco-config/localdatabase.xml:xaseco/localdatabase.xml
-      - ./xaseco-config/config.xml:xaseco/config.xml
-      - ./xaseco-config/adminops.xml:xaseco/adminops.xml
-      - ./xaseco-config/dedimania.xml:xaseco/dedimania.xml
+      - ./xaseco-config/localdatabase.xml:/xaseco/localdatabase.xml
+      - ./xaseco-config/config.xml:/xaseco/config.xml
+      - ./xaseco-config/adminops.xml:/xaseco/adminops.xml
+      - ./xaseco-config/dedimania.xml:/xaseco/dedimania.xml
     depends_on:
       - xaseco-db
       - tmnf-server
