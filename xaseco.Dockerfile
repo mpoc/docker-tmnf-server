@@ -1,4 +1,4 @@
-FROM php:8-alpine
+FROM php:7-alpine
 WORKDIR /xaseco
 COPY xaseco_116.zip .
 # According to https://www.gamers.org/tmf/quickstart.html
