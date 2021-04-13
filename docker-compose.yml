@@ -24,10 +24,8 @@ services:
       - tmnf-server
   xaseco-db:
     image: mysql:5.7
-    # command: --init-file=/xaseco-db-config/initialise.sql
     volumes:
       - ./xaseco-data:/var/lib/mysql
-      # - ./xaseco-db-config:/xaseco-db-config
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: tmnf
