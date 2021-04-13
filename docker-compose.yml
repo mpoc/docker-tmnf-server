@@ -3,13 +3,32 @@ version: "3.8"
 services:
   tmnf-server:
     image: mpoc/tmnf-server
-    container_name: tmnf-server
     volumes:
-      - ./config/tracks:/tmnf-server/GameData/Tracks/Challenges/Custom
-      - ./config/dedicated_cfg.txt:/tmnf-server/GameData/Config/dedicated_cfg.txt
-      - ./config/custom_match_settings.txt:/tmnf-server/GameData/Tracks/MatchSettings/custom_match_settings.txt
+      - ./tmnf-server-config/tracks:/tmnf-server/GameData/Tracks/Challenges/Custom
+      - ./tmnf-server-config/dedicated_cfg.txt:/tmnf-server/GameData/Config/dedicated_cfg.txt
+      - ./tmnf-server-config/custom_match_settings.txt:/tmnf-server/GameData/Tracks/MatchSettings/custom_match_settings.txt
     ports:
       - "2350:2350/tcp"
       - "2350:2350/udp"
       - "3450:3450/tcp"
       - "3450:3450/udp"
+  xaseco:
+    image: mpoc/xaseco
+    volumes:
+      - ./xaseco-config/localdatabase.xml:xaseco/localdatabase.xml
+      - ./xaseco-config/config.xml:xaseco/config.xml
+      - ./xaseco-config/adminops.xml:xaseco/adminops.xml
+      - ./xaseco-config/dedimania.xml:xaseco/dedimania.xml
+    depends_on:
+      - xaseco-db
+      - tmnf-server
+  xaseco-db:
+    image: mysql:5.7
+    volumes:
+      - ./xaseco-data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: tmnf
+      MYSQL_DATABASE: tmnf
+      MYSQL_USER: tmnf
+      MYSQL_PASSWORD: tmnf
