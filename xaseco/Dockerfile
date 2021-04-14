@@ -20,6 +20,8 @@ RUN docker-php-ext-install mysql      && \
     unzip records_eyepiece\(1.1.1\).zip records_eyepiece.xml                                   && \
     unzip records_eyepiece\(1.1.1\).zip placement_examples.xml                                 && \
     rm records_eyepiece\(1.1.1\).zip                                                           && \
-    sed -i '/^<\/aseco_plugins>/i\\t<plugin>plugin.records_eyepiece.php<\/plugin>' plugins.xml
+    sed -i '/^<\/aseco_plugins>/i\\t<plugin>plugin.records_eyepiece.php<\/plugin>' plugins.xml && \
+# Uncomment donate plugin because it is a dependency of records-eyepiece
+    sed -i 's/<!--	<plugin>plugin.donate.php<\/plugin> -->/\t<plugin>plugin.donate.php<\/plugin>/g' plugins.xml
 
 ENTRYPOINT ["php", "aseco.php", "TMF"]
