@@ -7,6 +7,7 @@ services:
       - ./tmnf-server-config/tracks:/tmnf-server/GameData/Tracks/Challenges/Custom
       - ./tmnf-server-config/dedicated_cfg.txt:/tmnf-server/GameData/Config/dedicated_cfg.txt
       - ./tmnf-server-config/custom_match_settings.txt:/tmnf-server/GameData/Tracks/MatchSettings/custom_match_settings.txt
+      - tmnf-gamedata:/tmnf-server/GameData
     ports:
       - "2350:2350/tcp"
       - "2350:2350/udp"
@@ -19,6 +20,7 @@ services:
       - ./xaseco-config/config.xml:/xaseco/config.xml
       - ./xaseco-config/adminops.xml:/xaseco/adminops.xml
       - ./xaseco-config/dedimania.xml:/xaseco/dedimania.xml
+      - tmnf-gamedata:/tmnf-server/GameData
     depends_on:
       - xaseco-db
       - tmnf-server
@@ -32,3 +34,6 @@ services:
       MYSQL_DATABASE: tmnf
       MYSQL_USER: tmnf
       MYSQL_PASSWORD: tmnf
+
+volumes:
+  tmnf-gamedata:
